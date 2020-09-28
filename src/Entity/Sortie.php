@@ -62,6 +62,15 @@ class Sortie
      */
     private $nbInscriptionsMax;
 
+    /**
+     * @var boolean
+     *
+     * @Assert\Type(type="boolean", message="This value is not valid!")
+     *
+     * @ORM\Column(type="boolean")
+     */
+
+    private $isPublished;
 
 
     public function __construct(){
@@ -202,7 +211,23 @@ class Sortie
     {
         $this->id = $id;
     }
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->isPublished;
+    }
 
+    /**
+     * @param bool $isPublished
+     */
+
+    public function setIsPublished(bool $isPublished)
+    {
+
+        $this->isPublished = $isPublished;
+    }
 
 
 }

@@ -42,14 +42,14 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
 
         $user = $this->getUser();
-        $sortie->setAuthor($user->getUsername());
+        $sortie->setName($user->getUsername());
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
             $sortie->setIsPublished(true);
-            $sortie->setDateCreated(new \DateTime());
+            $sortie->setDateHeureDebut(new \DateTime());
 
             $em->persist($sortie);
             $em->flush();

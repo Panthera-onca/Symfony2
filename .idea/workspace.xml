@@ -19,17 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87a5cb18-5fac-487f-b5fd-155d45b2c6d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/SortieController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Sortie.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/User/User1.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/RegisterType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/SortieType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/SortieRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+    <list default="true" id="87a5cb18-5fac-487f-b5fd-155d45b2c6d2" name="Default Changelist" comment="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +33,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="master" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="Panthera-onca" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="Symfony2" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -185,8 +180,18 @@
       <workItem from="1600890380408" duration="1343000" />
       <workItem from="1600937827924" duration="18975000" />
       <workItem from="1601046088349" duration="5406000" />
-      <workItem from="1601131740172" duration="15612000" />
+      <workItem from="1601131740172" duration="17457000" />
+      <workItem from="1601305139268" duration="2156000" />
+      <workItem from="1601315454002" duration="4341000" />
     </task>
+    <task id="LOCAL-00001" summary="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez.">
+      <created>1601171376430</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601171376430</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,16 +211,22 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez." />
+    <option name="LAST_COMMIT_MESSAGE" value="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez." />
   </component>
   <component name="WindowStateProjectService">
     <state x="488" y="46" key="#com.intellij.ide.util.MemberChooser" timestamp="1600981038942">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="488" y="46" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1600981038942" />
-    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1600890506564">
+    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1601173541399">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600890506564" />
+    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1601173541399" />
+    <state x="459" y="231" key="Github.CreatePullRequestDialog" timestamp="1601172201324">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="459" y="231" key="Github.CreatePullRequestDialog/0.0.1366.728@0.0.1366.728" timestamp="1601172201324" />
     <state x="561" y="262" key="Github.ShareDialog" timestamp="1600890914165">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -232,6 +243,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601170276554" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601173801265">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1601173801265" />
     <state x="513" y="155" key="svn.repositoryBrowser" timestamp="1600938634178">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

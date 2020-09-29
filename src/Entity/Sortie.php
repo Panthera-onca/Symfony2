@@ -74,7 +74,7 @@ class Sortie
 
 
     public function __construct(){
-        $this->seasons = new ArrayCollection();
+        $this->sortie = new ArrayCollection();
     }
 
     /**

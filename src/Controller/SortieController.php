@@ -60,4 +60,20 @@ class SortieController extends AbstractController
 
         return $this->render("sortie/add.html.twig", ["sortieForm" => $sortieForm->createView()]);
     }
+
+    /**
+     * @Route("/serie/delete/{id}", name="serie_delete", requirements={"id": "\d+"})
+     */
+    public function delete($id, EntityManagerInterface $em){
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+
+        $em->remove($sortie);
+        $em->flush();
+
+        $this->addFlash('success', 'Sortie était sumprimée!');
+
+        return $this->redirectToRoute('home');
+
+    }
 }

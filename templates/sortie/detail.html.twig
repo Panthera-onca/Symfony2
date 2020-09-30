@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <h1>{{ idea.title }}</h1>
+    <div class="sortie-meta">By {{ sortie.author }} ({{ sortie.dateCreated|date("Y-m-d H:i") }})</div>
+    <div class="description">{{ sortie.description|nl2br }}</div>
+    <div class="sortie-category">Classified in: {{ sortie.category.name }}</div>
+
+{% endblock %}
+
+{% block title %}{{ sortie.title }} | {{ parent() }}{% endblock %}

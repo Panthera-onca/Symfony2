@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <h1>Les dernières sorties</h1>
+    <div class="sortie-list">
+
+        {% for idea in ideas %}
+
+            <a href="{{ path('sortie_detail', {'id': sortie.id}) }}" title="Plus des details sur les  sorties {{ sortie.title }}">
+                <h5>{{ sortie.category.name }}</h5>{{ sortie.title }}
+            </a>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
+
+{% block title %}Les dernières sorties | {{ parent() }}{% endblock %}

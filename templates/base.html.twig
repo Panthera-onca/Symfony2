@@ -1,12 +1,58 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bucket-List{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <a class="site-title" href="{{ path('home') }}" title="Sorties | Home">
+            <img src="{{ asset('img/logo.png') }}" alt="Sorties"> Sortie
+        </a>
+        <nav>
+            <ul>
+                <li><a href="{{ path("home") }}" title="Sorties | Home">Home</a></li>
+                <li><a href="{{ path("idea_list") }}" title="Les derniers sorties">Les derniers sorties</a></li>
+                {% if is_granted("ROLE_USER") %}
+                    <li><a href="{{ path("idea_add") }}" title="Ajoutez des sorties">Ajoutez des sorties!</a></li>
+                {% endif %}
+                <li><a href="{{ path("about_us") }}" title="Les derniers sorties">Concernant les sorties</a></li>
+            </ul>
+
+            <ul>
+                {% if is_granted("ROLE_USER") %}
+                    <li><a href="#" disabled>Hi {{ app.user.username }}!</a></li>
+                    <li><a href="{{ path("logout") }}" title="Logout">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ path("register") }}" title="Souscrire">Souscrire</a></li>
+                    <li><a href="{{ path("login") }}" title="Login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="flashes">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        {% block main %}{% endblock %}
+    </main>
+
+    <footer>
+        © {{ "now"|date("Y") }} Sorties
+    </footer>
+</div>
+</body>
 </html>

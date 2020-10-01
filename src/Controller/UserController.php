@@ -80,7 +80,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('participants/reset_password.html.twig',[
+        return $this->render('user/reset_password.html.twig',[
             'page_name' => 'Réinitialiser le mot de passe',
             'form' => $form->createView()
         ]);

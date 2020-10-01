@@ -205,7 +205,7 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('sortie/details.html.twig', [
+        return $this->render('sortie/detail.html.twig', [
             "sortie" => $sortie,
             "participants" => $participants
         ]);

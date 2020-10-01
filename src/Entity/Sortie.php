@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\User\User1;
 
 /**
  * @UniqueEntity(fields={"tmdbId"})
@@ -39,7 +40,7 @@ class Sortie
      *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $status;
+    private $etat;
 
 
     /**
@@ -72,6 +73,16 @@ class Sortie
 
     private $isPublished;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $dateSortie;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User1", inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organisateur;
+
 
     public function __construct(){
         $this->sortie = new ArrayCollection();
@@ -95,21 +106,7 @@ class Sortie
 
 
 
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
 
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
 
     /**
      * @return mixed
@@ -228,6 +225,63 @@ class Sortie
 
         $this->isPublished = $isPublished;
     }
+    /**
+     * @return mixed $etat
+     */
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
+        return $this;
+    }
 
+    /**
+     * @param $etat
+     * 
+     */
+    public function getEtat($etat): ?string
+    {
+        return $this->$etat;
+    }
+    
+    
+
+    public function setSiteOrg($getUserSite)
+    {
+    }
+    /**
+     * @param $dateSortie
+     *
+     */
+    public function getDateSortie(): ?\DateTimeInterface
+    {
+        return $this->dateSortie;
+    }
+    /**
+     * @return mixed $dateSortie
+     */
+    public function setDateSortie(?\DateTimeInterface $dateSortie): self
+    {
+        $this->dateSortie = $dateSortie;
+
+        return $this;
+    }
+
+    /**
+     * @param $organisateur
+     *
+     */
+    public function getOrganisateur(): ?User1
+    {
+        return $this->organisateur;
+    }
+    /**
+     * @return mixed $organisateur
+     */
+    public function setOrganisateur(?User1 $organisateur): self
+    {
+        $this->organisateur = $organisateur;
+
+        return $this;
+    }
 }

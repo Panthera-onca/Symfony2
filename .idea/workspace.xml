@@ -19,15 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87a5cb18-5fac-487f-b5fd-155d45b2c6d2" name="Default Changelist" comment="Mon premier essai de faire des fichers twig">
-      <change afterPath="$PROJECT_DIR$/src/Controller/LieuController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Lieu.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/LieuFormType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/LieuRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/sortie/creer_sortie.html.twig" afterDir="false" />
+    <list default="true" id="87a5cb18-5fac-487f-b5fd-155d45b2c6d2" name="Default Changelist" comment="La mise a jour plus recente">
+      <change afterPath="$PROJECT_DIR$/src/Controller/VilleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Ville.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/VilleRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SortieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Sortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Sortie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +197,8 @@
       <workItem from="1601315454002" duration="9269000" />
       <workItem from="1601398037362" duration="2142000" />
       <workItem from="1601407757281" duration="11828000" />
-      <workItem from="1601468732674" duration="14020000" />
+      <workItem from="1601468732674" duration="14382000" />
+      <workItem from="1601544931584" duration="8829000" />
     </task>
     <task id="LOCAL-00001" summary="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez.">
       <created>1601171376430</created>
@@ -251,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601438524082</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="La mise a jour plus recente">
+      <created>1601518781967</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1601518781998</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +280,8 @@
     <MESSAGE value="Corrections de code existante2" />
     <MESSAGE value="Corrections de code existante" />
     <MESSAGE value="Mon premier essai de faire des fichers twig" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mon premier essai de faire des fichers twig" />
+    <MESSAGE value="La mise a jour plus recente" />
+    <option name="LAST_COMMIT_MESSAGE" value="La mise a jour plus recente" />
   </component>
   <component name="WindowStateProjectService">
     <state x="488" y="46" key="#com.intellij.ide.util.MemberChooser" timestamp="1600981038942">
@@ -302,14 +308,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="489" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1601490748198" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1601518033471">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1601560454848">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601518033411" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601438684195">
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601560454848" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601518804049">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601438684195" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601518804049" />
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601173801265">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

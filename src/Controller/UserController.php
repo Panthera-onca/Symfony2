@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
@@ -43,6 +44,45 @@ class UserController extends AbstractController
         return $this->render("user/register.html.twig", [
             "registerForm"=>$registerForm->createView()
 
+        ]);
+    }
+
+    /**
+     * @Route("/reset_password/{email}", name="reset_password_email")
+     */
+    public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, $email){
+        $user = new User1();
+        $form = $this->createForm(RegisterType::class);
+        $form->remove('id')
+            ->remove('pseudo')
+            ->remove('nom')
+            ->remove('prenom')
+            ->remove('telephone')
+            ->remove('mail')
+            ->remove('campus')
+            ->remove('photo');
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $user = $form->getData();
+            $userModif = $em->getRepository(User1::class)->findOneByMail($email);
+
+            $userModif->setPassword('');
+            $password = $passwordEncoder->encodePassword($user, $form->getData()->getPassword());
+            $userModif->setPassword($password);
+
+            $em->persist($userModif);
+            $em->flush();
+
+            $this->addFlash('success','Votre mot de passe à été modifié !');
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('participants/reset_password.html.twig',[
+            'page_name' => 'Réinitialiser le mot de passe',
+            'form' => $form->createView()
         ]);
     }
 

@@ -3,10 +3,12 @@
 
 namespace App\Repository;
 
-
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,18 +23,69 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function findListSorties()
-    {
-        return $this->createQueryBuilder('i')
-            ->addSelect('name')
-            ->where('i.dateLimiteInscription = true')
-            ->join('i.status', 'name')
-            ->orderBy('i.dateHeureDebut', 'DESC')
-            ->setMaxResults(50)
+    public function findSortiesContenant(string $search){
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.nom LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->orderBy('s.dateSortie', 'DESC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
+    public function findSortiesPlusRecentes()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.dateSortie', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findSortiesEntreDates(\DateTime $dateEntre, \DateTime $dateEt){
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateSortie BETWEEN :dateEntre and :dateEt')
+            ->setParameter('dateEntre', $dateEntre)
+            ->setParameter('dateEt', $dateEt)
+            ->orderBy('s.dateSortie', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+    }
+
+    public function findSortiesNonArchivees(DateTime $jours){
+        $jours = \date('y/m/d H:i');
+        return $this->createQueryBuilder('s')
+            ->setParameter('s.etat', 'Archivée')
+            ->where("s.dateSortie <= DATE_SUB('.$jours.', 1, 'MONTH')")
+            ->getQuery()
+            ->getResult();
+
+    }
+
+
+    public function findSortiesPass()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.etat = :etat')
+            ->setParameter('etat', "Passée")
+            ->orderBy('s.dateSortie', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+      * @return Sortie[]
+      */
+
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 }

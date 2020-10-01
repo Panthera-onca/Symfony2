@@ -3,6 +3,7 @@
 
 namespace App\Entity\User;
 
+use App\Entity\Site;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +40,11 @@ class User1 implements UserInterface
 
     private $password;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     private $administrateur;
 
     /**
@@ -50,6 +56,11 @@ class User1 implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $dateCreated;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $userSite;
 
 
     public function setCampus_no_campus($campus_no_campus){
@@ -152,8 +163,33 @@ class User1 implements UserInterface
         return null;
     }
 
-    public function getRoles()
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        // TODO: Implement getRoles() method.
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getUserSite(): ?Site
+    {
+        return $this->userSite;
+    }
+
+    public function setUserSite(?Site $userSite): self
+    {
+        $this->userSite = $userSite;
+
+        return $this;
     }
 }

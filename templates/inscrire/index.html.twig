@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+
+    <table id="tableHome">
+
+        <tr>
+            <th>Nom Groupe</th>
+            <th>Chef Groupe</th>
+            <th>Actions</th>
+        </tr>
+
+
+        {% for groupe in groupes %}
+
+
+            <tr>
+                <td>{{ groupe.nom }}</td>
+                <td>{{ groupe.chef }}</td>
+                <td>
+                    {% if (user not in groupe.participants) %}
+                        <a href="{{  path('groupeInscrit', {'id': groupe.id} ) }}">S'incrire</a>
+                    {%  endif %}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+
+{% endblock %}

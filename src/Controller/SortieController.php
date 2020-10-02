@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Form\AnnulerSortieType;
 use App\Form\SortieType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -212,6 +213,137 @@ class SortieController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/sortie/inscrire/{id}",
+     *      name="inscrire",
+     *     requirements={"id": "\d+"},
+     *     methods={"GET"})
+     */
+    public function inscrire(int $id)
+    {
+        $SortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $SortieRepository->find($id);
+
+
+        if(count($sortie->getParticipants()) < $sortie->getNbPlace())
+        {
+            $sortie->addParticipant($this->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($sortie);
+            $em->flush();
+        }
+        else
+        {
+            $this->addFlash('danger', "Dommage il semblerait qu'il n'y est plus de place pour cette sortie ! :( ");
+        }
+
+        return $this->render('inscrire/index.html.twig');
+    }
+
+    /**
+     * @Route("/sortie/publier/{id}",
+     *     name="publier",
+     *     requirements={"id": "\d+"},
+     *     methods={"GET"}
+     *     )
+     */
+    public function publierSortie(int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $SortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $SortieRepository->find($id);
+
+        $currentDatetime = new \DateTime('now');
+
+        if($sortie->getOrganisateur() == $this->getUser() or $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
+        {
+            if($sortie->getDateLimiteInscription() > $currentDatetime->modify('+ 12 hours') and $sortie->getDateLimiteInscription() < $sortie->getDateSortie())
+            {
+                $sortie->setEtat("Ouvert");
+                $em->persist($sortie);
+                $em->flush();
+
+                $this->addFlash('success', 'Votre sortie a bien été publiée.');
+                return $this->redirectToRoute("home");
+            }
+            else
+            {
+                $this->addFlash('danger', "La date limite d'inscription doit être supérieure à ". $currentDatetime->format("Y-m-d H:i"). ", soit 12h à compter de maintenant, 
+                pour laisser le temps aux participants de s'informer !");
+                return $this->redirectToRoute("home");
+            }
+
+        }
+        else
+        {
+            $this->addFlash('danger', 'Cette sortie ne vous appartient pas !');
+            return $this->redirectToRoute('home');
+        }
+    }
+
+
+    /**
+     * @Route("/sorties/annuler/{id}", name="annuler_sortie")
+     */
+    public function annuler_sortie(Request $request, EntityManagerInterface $em, Sortie $sortie){
+
+        $participant = $this->getUser();
+
+        $form = $this->createForm(AnnulerSortieType::class, $sortie);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $sortie->setInfosSortie($form['infosSortie']->getData());
+            $sortie->setEtat("Annulée");
+
+            $em->flush();
+            $this->addFlash('success', 'La sortie a été annulée !');
+
+            $this->sortiesListe = $em->getRepository(Sortie::class)->findAll();
+
+            return $this->redirectToRoute('sorties');
+
+        }
+
+
+
+        return $this->render('sortie/annuler.html.twig', [
+            'page_name' => 'Annuler Sortie',
+            'sortie' => $sortie,
+            'participants' => $participant,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/sortie/desister/{id}",
+     *     name="desister",
+     *     requirements={"id": "\d+"},
+     *     methods={"GET"}
+     *     )
+     */
+    public function desister(int $id)
+    {
+        $sortieRepository = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepository->find($id);
+
+        if (!$sortie) {
+            $this->addFlash('danger', "Cette sortie n'existe pas !");
+            return $this->redirectToRoute('home');
+        }
+
+        // supprime l'utilisateur de la liste des participants
+        $sortie->removeParticipant($this->getUser());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
 
     /**
      * @Route("/serie/delete/{id}", name="serie_delete", requirements={"id": "\d+"})

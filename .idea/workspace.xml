@@ -20,10 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87a5cb18-5fac-487f-b5fd-155d45b2c6d2" name="Default Changelist" comment="La mise a jour plus recente">
-      <change afterPath="$PROJECT_DIR$/src/Entity/Groupe.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/GroupeType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/GroupeRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/AnnulerSortieType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/inscrire/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/sortie/annuler.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SortieController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +198,8 @@
       <workItem from="1601398037362" duration="2142000" />
       <workItem from="1601407757281" duration="11828000" />
       <workItem from="1601468732674" duration="14382000" />
-      <workItem from="1601544931584" duration="26243000" />
+      <workItem from="1601544931584" duration="27246000" />
+      <workItem from="1601626352806" duration="3400000" />
     </task>
     <task id="LOCAL-00001" summary="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez.">
       <created>1601171376430</created>
@@ -283,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601598172008</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="La mise a jour plus recente">
+      <created>1601602820247</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1601602820247</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,14 +344,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="489" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1601490748198" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1601602549447">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1601628548483">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601602549447" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601598188910">
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601628548483" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601602840753">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601598188910" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601602840753" />
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601173801265">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

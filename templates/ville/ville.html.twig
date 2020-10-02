@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sortir | Ville{% endblock %}
+
+{% block content %}
+
+    <script>
+        function demoVisibility() {
+            document.getElementById("myP2").style.visibility = "hidden";
+        }
+        function demoVisibility2(id) {
+            document.getElementById("id1").value=id;
+            document.getElementById("myP2").style.visibility = "visible";
+        }
+    </script>
+    <h1> GERER LES VILLES </h1>
+
+
+
+    <p> Filtrer les villes </p>
+    <form method="post" action="{{ 'ville' }}">
+        <label> Le nom contient : </label>
+        <input type="text" name="ville">
+        <button type="submit"> RECHERCHER</button>
+
+    </form>
+
+    <table id="tableHome">
+        <tr>
+            <th>Ville</th>
+            <th>Code postal</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for ville in villes %}
+            <tr>
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td><a onclick="demoVisibility2({{ ville.id }})" href="#">Modifier</a> ---
+                    <a  href="{{ path('supprVille', {'id' : ville.id} ) }}">Supprimer</a> </td>
+            </tr>
+
+        {% endfor %}
+        <tr>
+            <form method="post" action="{{ 'ville' }}">
+                <td><input type="text" name="nom"></td>
+                <td><input type="text" name="cp"></td>
+                <td><button type="submit">Ajouter</button></td>
+            </form>
+        </tr>
+    </table>
+
+    <div class="test">
+
+        <form  id="myP2" method="post" >
+
+            <input type="hidden" name="id" id="id1" value="">
+
+            <label>Nouveau nom</label>
+
+            <input type="text" name="newNom">
+            <label>Nouveau code postal</label>
+
+            <input type="text" name="newCp">
+
+            <button type="submit" name="modifier"> Modifier </button>
+
+        </form>
+    </div>
+{% endblock %}

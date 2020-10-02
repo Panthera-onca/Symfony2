@@ -3,7 +3,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\SortieType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +22,6 @@ class SortieController extends AbstractController
     {
         $sortie = new Sortie();
         $sortieForm = $this->createForm(SortieType::class, $sortie);
-        // récuperation des villes
         $repoVille = $this->getDoctrine()->getRepository(Ville::class);
         $villes = $repoVille->findAll();
         $user = $this->getUser();
@@ -146,7 +147,7 @@ class SortieController extends AbstractController
             'sortieForm' => $sortieForm->createView(),
             'sortie' => $sortie,
             'villes' => $villes,
-            //'lieux' => $allLieu,
+            'lieux' => $allLieu,
         ]);}
     /**
      * @Route("/sorties/{id}", name="sortie_detail", requirements={"id": "\d+"})

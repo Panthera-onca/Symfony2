@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User\User1;
+use App\Entity\Participants;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -15,7 +15,8 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('username')
+                ->add('id')
+                ->add('pseudo')
                 ->add('nom')
                 ->add('prenom')
                 ->add('mail', EmailType::class)
@@ -33,7 +34,7 @@ class RegisterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User1::class,
+            'data_class' => Participants::class,
         ]);
     }
 }

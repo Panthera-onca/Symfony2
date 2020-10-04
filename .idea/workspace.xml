@@ -21,10 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87a5cb18-5fac-487f-b5fd-155d45b2c6d2" name="Default Changelist" comment="La mise a jour plus recente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AnnulerSortieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AnnulerSortieType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/LieuFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/LieuFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegisterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegisterType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/SortieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SortieType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/VilleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/VilleRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +203,7 @@
       <workItem from="1601737177770" duration="7130000" />
       <workItem from="1601753674129" duration="12763000" />
       <workItem from="1601771487939" duration="3163000" />
-      <workItem from="1601812872747" duration="3600000" />
+      <workItem from="1601812872747" duration="4120000" />
     </task>
     <task id="LOCAL-00001" summary="C'est mon premier essai de faire une commit. Je invite de critique du code et de correction des erreurs si vous les trouvez.">
       <created>1601171376430</created>
@@ -312,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601771767582</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="La mise a jour plus recente">
+      <created>1601820427243</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1601820427261</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,10 +377,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1601749468405" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601771782846">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601820450408">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601771782846" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601820450408" />
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601173801265">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

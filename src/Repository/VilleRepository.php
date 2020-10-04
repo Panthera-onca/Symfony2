@@ -26,7 +26,7 @@ class VilleRepository extends ServiceEntityRepository
     public function findByExampleField($value): ?array
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.nom like :val')
+            ->andWhere('v.nomVille like :val')
             ->setParameter('val', "%$value%")
             ->orderBy('v.id', 'ASC')
             ->setMaxResults(10)

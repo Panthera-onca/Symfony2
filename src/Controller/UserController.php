@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 
-use App\Entity\User\User1;
+use App\Entity\Participants;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +28,7 @@ class UserController extends AbstractController
     public function register(Request $request,
                              EntityManagerInterface $em,
                              PasswordEncoderInterface $encoder){
-        $user = new User1();
+        $user = new Participants();
         $user->setDateCreated(new \DateTime());
         $registerForm = $this->createForm(RegisterType::class, $user);
         $registerForm->handleRequest($request);
@@ -51,22 +51,21 @@ class UserController extends AbstractController
      * @Route("/reset_password/{email}", name="reset_password_email")
      */
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, $email){
-        $user = new User1();
+        $user = new Participants();
         $form = $this->createForm(RegisterType::class);
         $form->remove('id')
             ->remove('pseudo')
             ->remove('nom')
-            ->remove('prenom')
+            ->remove('profil')
             ->remove('telephone')
             ->remove('mail')
-            ->remove('campus')
-            ->remove('photo');
+            ->remove('campus');
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
-            $userModif = $em->getRepository(User1::class)->findOneByMail($email);
+            $userModif = $em->getRepository(Participants::class)->findOneByMail($email);
 
             $userModif->setPassword('');
             $password = $passwordEncoder->encodePassword($user, $form->getData()->getPassword());

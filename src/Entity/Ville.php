@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +40,16 @@ class Ville
      * @ORM\OneToMany(targetEntity="App\Entity\Lieux", mappedBy="ville")
      */
     private $lieux ;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="villeLieu")
+     */
+    private $lieus;
+
+    public function __construct()
+    {
+        $this->lieus = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -102,6 +113,29 @@ class Ville
     public function setLieux($lieux): void
     {
         $this->lieux = $lieux;
+    }
+
+    public function addLieu(Lieu $lieu): self
+    {
+        if (!$this->lieus->contains($lieu)) {
+            $this->lieus[] = $lieu;
+            $lieu->setVilleLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLieu(Lieu $lieu): self
+    {
+        if ($this->lieus->contains($lieu)) {
+            $this->lieus->removeElement($lieu);
+            // set the owning side to null (unless already changed)
+            if ($lieu->getVilleLieu() === $this) {
+                $lieu->setVilleLieu(null);
+            }
+        }
+
+        return $this;
     }
 
 

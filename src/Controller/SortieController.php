@@ -8,14 +8,24 @@ use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\AnnulerSortieType;
 use App\Form\SortieType;
+use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
 class SortieController extends AbstractController
 {
-
+    /**
+     * @Route("/", name="sortie_index", methods={"GET"})
+     */
+    public function index(SortieRepository $sortieRepository): Response
+    {
+        return $this->render('sortie/index.html.twig', [
+            'sorties' => $sortieRepository->findAll(),
+        ]);
+    }
     /**
      * @Route("/sortie/create", name="createsortie")
      */
@@ -169,7 +179,7 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
 
         $user = $this->getUser();
-        $sortie->setName($user->getUsername());
+        $sortie->setTitre($user->getUsername());
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 

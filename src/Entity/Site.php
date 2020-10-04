@@ -72,14 +72,14 @@ class Site
     }
 
     /**
-     * @return Collection|User1[]
+     * @return Collection|Participants[]
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(User1 $user): self
+    public function addUser(Participants $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -89,7 +89,7 @@ class Site
         return $this;
     }
 
-    public function removeUser(User1 $user): self
+    public function removeUser(Participants $user): self
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);

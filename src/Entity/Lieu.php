@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Lieu
 {
+
     public function __toString()
     {
         return $this->getNom();
@@ -45,6 +46,11 @@ class Lieu
      * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieus")
+     */
+    private $villeLieu;
 
 
     /**
@@ -120,7 +126,7 @@ class Lieu
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): self
+    public function addSortie(Sortie $sorty): self
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties[] = $sorty;
@@ -134,11 +140,22 @@ class Lieu
     {
         if ($this->sorties->contains($sorty)) {
             $this->sorties->removeElement($sorty);
-            // set the owning side to null (unless already changed)
             if ($sorty->getInfosSortie() === $this) {
                 $sorty->setInfosSortie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVilleLieu(): ?Ville
+    {
+        return $this->villeLieu;
+    }
+
+    public function setVilleLieu(?Ville $villeLieu): self
+    {
+        $this->villeLieu = $villeLieu;
 
         return $this;
     }

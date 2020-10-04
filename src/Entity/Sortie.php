@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\User\User1;
+use App\Entity\Participants;
 
 /**
  * @UniqueEntity(fields={"tmdbId"})
@@ -25,11 +25,10 @@ class Sortie
      */
     private $id;
     /**
-     * @Assert\NotBlank(message="Please, provide a message")
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(groups={"save", "saveWithLieu"})
      */
-
-    private $name;
+    private $titre;
     /**
      *
      * @ORM\Column(type="time")
@@ -41,6 +40,12 @@ class Sortie
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, cascade={"persist"})
+     * @Assert\NotBlank(groups={"save"})
+     */
+    private $lieu;
 
 
     /**
@@ -97,17 +102,17 @@ class Sortie
     /**
      * @return mixed
      */
-    public function getName()
+    public function getTitre()
     {
-        return $this->name;
+        return $this->titre;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $titre
      */
-    public function setName($name)
+    public function setTitre($titre)
     {
-        $this->name = $name;
+        $this->name = $titre;
     }
 
 
@@ -180,24 +185,24 @@ class Sortie
         $this->infosSortie = $infosSortie;
     }
 
-
-
     /**
-     * @return mixed
+     * @return Lieu|null
      */
-    public function getNbInscriptionsMax()
+    public function getLieu(): ?Lieu
     {
-        return $this->nbInscriptionsMax;
+        return $this->lieu;
     }
 
     /**
-     * @param mixed $nbInscriptionsMax
+     * @param Lieu|null $lieu
+     * @return Sortie
      */
-    public function setNbInscriptionsMax($nbInscriptionsMax)
+    public function setLieu(?Lieu $lieu): self
     {
-        $this->nbInscriptionsMax = $nbInscriptionsMax;
-    }
+        $this->lieu = $lieu;
 
+        return $this;
+    }
 
 
 
@@ -255,9 +260,9 @@ class Sortie
     public function setSiteOrg($getUserSite)
     {
     }
+
     /**
-     * @param $dateSortie
-     *
+     * @return \DateTimeInterface|null
      */
     public function getDateSortie(): ?\DateTimeInterface
     {
@@ -274,17 +279,17 @@ class Sortie
     }
 
     /**
-     * @param $organisateur
-     *
+     * @return \App\Entity\Participants|null
      */
-    public function getOrganisateur(): ?User1
-    {
+    public function getOrganisateur(): ?Participants{
         return $this->organisateur;
     }
+
     /**
+     * @param \App\Entity\Participants|null $organisateur
      * @return mixed $organisateur
      */
-    public function setOrganisateur(?User1 $organisateur): self
+    public function setOrganisateur(?Participants $organisateur): self
     {
         $this->organisateur = $organisateur;
 

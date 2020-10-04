@@ -16,7 +16,7 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label'=>'Sortie\s name'])
+            ->add('titre', TextType::class, ['label'=>'Sortie\s titre'])
             ->add('infosSortie', TextareaType::class, ['label'=>'Serie\s infosSortie','attr' => ['class' => 'infosSortie-text']])
 
             ->add('nbInscriptionsMax', IntegerType::class, ['attr' => ['placeholder' => 333]]);

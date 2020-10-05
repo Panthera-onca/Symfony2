@@ -6,11 +6,15 @@ use App\Entity\Participants;
 use App\Entity\Site;
 use App\Entity\Sortie;
 use App\Form\RegisterType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 
 class DefaultController extends AbstractController
 {
@@ -22,26 +26,99 @@ class DefaultController extends AbstractController
         return $this->render("default/home.html.twig");
     }
 
+
     /**
-     * @Route("/my_profil", name="my_profil"),
-     * ;
+     * @Route("/register", name="register")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param PasswordEncoderInterface $encoder
+     *
+     * @return Response
      */
-    public function showMyProfil() {
+    public function register(Request $request,
+                             EntityManagerInterface $em,
+                             UserPasswordEncoderInterface $encoder ){
+        $user = new Participants();
+        $user->setDateCreated(new \DateTime());
+        $registerForm = $this->createForm(RegisterType::class, $user);
+        $registerForm->handleRequest($request);
+        if($registerForm->isSubmitted() && $registerForm->isValid()){
+            $hashed = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hashed);
 
-        $userRepo = $this->getDoctrine()->getRepository(Participants::class);
-        $currentUser =$userRepo->find($this->getUser());
+            $em->persist($user);
+            $em->flush();
 
+        }
 
-        return $this->render('user/user_profil.html.twig', [
-            'currentUser' => $currentUser
+        return $this->render("user/register.html.twig", [
+            "registerForm"=>$registerForm->createView()
+
         ]);
+    }
+
+    /**
+     * @Route("/reset_password/{email}", name="reset_password_email")
+     */
+    public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, $email){
+        $user = new Participants();
+        $form = $this->createForm(RegisterType::class);
+        $form->remove('id')
+            ->remove('pseudo')
+            ->remove('nom')
+            ->remove('role')
+            ->remove('telephone')
+            ->remove('mail')
+            ->remove('campus');
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $user = $form->getData();
+            $userModif = $em->getRepository(Participants::class)->findOneByMail($email);
+
+            $userModif->setPassword('');
+            $password = $passwordEncoder->encodePassword($user, $form->getData()->getPassword());
+            $userModif->setPassword($password);
+
+            $em->persist($userModif);
+            $em->flush();
+
+            $this->addFlash('success','Votre mot de passe à été modifié !');
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('user/reset_password.html.twig',[
+            'page_name' => 'Réinitialiser le mot de passe',
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/login", name="login")
+     * @param AuthenticationUtils $authUtils
+     * @return Response
+     */
+    public function login(AuthenticationUtils $authUtils){
+        $error = $authUtils->getLastAuthenticationError();
+        $lastUsername = $authUtils->getLastUsername();
+        return $this->render('user/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
+    }
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){
+
     }
 
 
 
-
     /**
-     * @Route("/update_my_profil", name="update_my_profil"),
+     * @Route("/user_profil", name="update_my_profil"),
      * ;
      */
     public function updateMyProfil(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
@@ -50,7 +127,6 @@ class DefaultController extends AbstractController
         $currentUser =$userRepo->find($this->getUser());
 
         $currentUser->setPseudo($request->request->get('pseudo'));
-        $currentUser->setPrenom($request->request->get('prenom'));
         $currentUser->setNom($request->request->get('nom'));
         $currentUser->setTelephone($request->request->get('tel'));
         $password = $request->request->get('password');

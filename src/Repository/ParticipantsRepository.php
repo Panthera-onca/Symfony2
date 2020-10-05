@@ -19,23 +19,24 @@ class ParticipantsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Participants::class);
     }
-    /**
-      * @return Participants[] Returns an array of Groupe objects
-      */
-
-    public function findByExampleField($value)
+     //**
+     //* @return Participants[] Returns an array of Groupe objects
+     //*/
+    /*
+    public function findByExampleField($id)
     {
         return $this->createQueryBuilder('g')
             ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
+            ->setParameter('val', $id )
             ->orderBy('g.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
+    */
 
-
+    /*
     public function findOneBySomeField($value): ?Participants
     {
         try {
@@ -47,4 +48,7 @@ class ParticipantsRepository extends ServiceEntityRepository
         } catch (NonUniqueResultException $e) {
         }
     }
-}
+    */
+
+    }
+

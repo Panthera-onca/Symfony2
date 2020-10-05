@@ -18,7 +18,6 @@ class RegisterType extends AbstractType
                 ->add('id')
                 ->add('pseudo')
                 ->add('nom')
-                ->add('prenom')
                 ->add('mail', EmailType::class)
                 ->add('telephone')
                 ->add('password', RepeatedType::class, [

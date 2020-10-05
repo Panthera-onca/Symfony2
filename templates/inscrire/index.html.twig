@@ -6,21 +6,19 @@
     <table id="tableHome">
 
         <tr>
-            <th>Nom Groupe</th>
-            <th>Chef Groupe</th>
+            <th>Nom participant</th>
             <th>Actions</th>
         </tr>
 
 
-        {% for groupe in groupes %}
+        {% for participant in participants %}
 
 
             <tr>
-                <td>{{ groupe.nom }}</td>
-                <td>{{ groupe.chef }}</td>
+                <td>{{ participant.nom }}</td>
                 <td>
                     {% if (user not in groupe.participants) %}
-                        <a href="{{  path('groupeInscrit', {'id': groupe.id} ) }}">S'incrire</a>
+                        <a href="{{  path('participInscrit', {'id': participant.id} ) }}">S'incrire</a>
                     {%  endif %}
                 </td>
             </tr>

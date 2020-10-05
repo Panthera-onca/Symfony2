@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantsRepository::class)
@@ -26,12 +27,8 @@ class Participants implements UserInterface
 
     private $salt;
 
-    public function __construct($id, $password, $salt, array $roles)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->password = $password;
-        $this->salt = $salt;
-        $this->roles = $roles;
         $this->participants = new ArrayCollection();
     }
     /**
@@ -54,11 +51,37 @@ class Participants implements UserInterface
     private $pseudo;
 
     /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Participants::class, inversedBy="groupes")
      * @ORM\JoinColumn(nullable=false)
      */
 
     private $participants;
+    /**
+     * @Assert\NotBlank(message= "L'email ne peut être vide !")
+     * Assert\Length(min="5",
+     *     max="180",
+     *     minMessage="5 caractères minimum !",
+     *     maxMessage="180 caractères maximum !")
+     *
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $mail;
+
+    /**
+     * @Assert\NotBlank(message= "Le téléphone ne peut être vide !")
+     * Assert\Length(min="12",
+     *     max="12",
+     *     exactMessage="12 caractères requis !")
+     *
+     * @ORM\Column(type="string", length=12)
+     */
+    private $telephone;
     /**
      * @ORM\Column (type="binary")
      */
@@ -71,6 +94,15 @@ class Participants implements UserInterface
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
 
     public function getNom(): ?string
     {
@@ -102,16 +134,43 @@ class Participants implements UserInterface
 
 
     /**
-     * @return string|null The encoded password if any
+     * @see UserInterface
      */
-    public function getPassword()
+    public function getPassword(): string
     {
-        return $this->getPassword();
+        return (string) $this->password;
     }
 
-    public function setPassword($string)
+    public function setPassword(string $password): self
     {
-        $this->setPassword($string);
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
     }
 
 
@@ -180,15 +239,7 @@ class Participants implements UserInterface
         return $this->salt;
     }
 
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
 
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
     /**
      * @return mixed
      */
@@ -205,4 +256,19 @@ class Participants implements UserInterface
         $this->administratif = $administrateur;
     }
 
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
 }

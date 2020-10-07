@@ -4,7 +4,7 @@ security:
     providers:
         our_db_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Participants
                 property: username
 
     firewalls:
@@ -21,7 +21,7 @@ security:
                 target: home
 
     encoders:
-        App\Entity\User:
+        App\Entity\Participants:
             algorithm: bcrypt
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

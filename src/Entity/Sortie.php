@@ -63,10 +63,6 @@ class Sortie
      */
     private $infosSortie;
 
-    /**
-     * @ORM\Column(type="integer", unique=true)
-     */
-    private $nbInscriptionsMax;
 
     /**
      * @var boolean
@@ -83,7 +79,7 @@ class Sortie
      */
     private $dateSortie;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\User1", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Participants", inversedBy="sorties")
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;

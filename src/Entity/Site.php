@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\User\User1;
+use App\Entity\Participants;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,7 +39,7 @@ class Site
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="userSite")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participants", mappedBy="userSite")
      */
     private $users;
 

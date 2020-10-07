@@ -6,6 +6,8 @@ use App\Repository\ParticipantsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message= "Le mail que vous avez indiqué est déjà utilisé"
  * )
  * @UniqueEntity(
- *     fields= {"username"},
+ *     fields= {"pseudo"},
  *     message= "Ce pseudo est déjà utilisé !"
  *     )
  */
@@ -35,7 +37,10 @@ class Participants implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ManyToOne(targetEntity="Participants", inversedBy="id")
+     * @JoinColumn(name="participants_id", referencedColumnName="id")
      */
+
     private $id;
 
     /**
@@ -60,6 +65,7 @@ class Participants implements UserInterface
      * @ORM\ManyToOne(targetEntity=Participants::class, inversedBy="groupes")
      * @ORM\JoinColumn(nullable=false)
      */
+    
 
     private $participants;
     /**
